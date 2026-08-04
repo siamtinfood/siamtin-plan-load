@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Siam Tin Plan Load - Excel Export
+  </title>
+
+  <style>
+    :root{
+      --navy:#0b3a75;
+      --blue:#1459a6;
+      --yellow:#f5c842;
+      --bg:#f4f7fb;
+      --line:#dbe2ea;
+      --text:#1f2937;
+      --muted:#64748b;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    body{
+      margin:0;
+      font-family:
+        Arial,
+        "Noto Sans Thai",
+        sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    header{
+      background:white;
+      border-bottom:1px solid var(--line);
+      padding:18px 24px;
+    }
+
+    header h1{
+      margin:0;
+      color:var(--navy);
+      font-size:24px;
+    }
+
+    header p{
+      margin:5px 0 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    main{
+      max-width:1100px;
+      margin:24px auto;
+      padding:0 16px;
+    }
+
+    .card{
+      background:white;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:20px;
+      box-shadow:0 4px 16px rgba(15,23,42,.04);
+    }
+
+    .notice{
+      margin-bottom:16px;
+      padding:12px 14px;
+      border-left:5px solid var(--yellow);
+      background:#fff9db;
+      border-radius:8px;
+      font-size:13px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:12px;
+    }
+
+    .field{
+      min-width:0;
+    }
+
+    .field.w2{
+      grid-column:span 2;
+    }
+
+    label{
+      display:block;
+      margin-bottom:5px;
+      font-size:12px;
+      font-weight:700;
+      color:#334155;
+    }
+
+    input,
+    select{
+      width:100%;
+      padding:10px;
+      border:1px solid #cfd8e3;
+      border-radius:8px;
+      background:white;
+      font-size:13px;
+    }
+
+    .section-title{
+      grid-column:1 / -1;
+      margin:10px 0 0;
+      padding:9px 12px;
+      border-left:5px solid var(--yellow);
+      background:#eef4fb;
+      color:var(--navy);
+      font-size:14px;
+      font-weight:800;
+    }
+
+    .actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:8px;
+      margin-top:18px;
+    }
+
+    button{
+      border:0;
+      border-radius:9px;
+      padding:11px 17px;
+      cursor:pointer;
+      font-weight:800;
+    }
+
+    .primary{
+      background:var(--navy);
+      color:white;
+    }
+
+    .light{
+      background:#edf2f7;
+      color:var(--navy);
+    }
+
+    #status{
+      margin-top:14px;
+      min-height:22px;
+      font-size:13px;
+    }
+
+    @media(max-width:850px){
+      .grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media(max-width:520px){
+      .grid{
+        grid-template-columns:1fr;
+      }
+
+      .field.w2{
+        grid-column:span 1;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+<header>
+  <h1>
+    Siam Tin Plan Load
+  </h1>
+
+  <p>
+    Excel Master Export System
+  </p>
+</header>
+
+
+<main>
+
+<div class="card">
+
+  <div class="notice">
+    หน้านี้เป็นหน้าทดสอบ Vercel ก่อนเชื่อมกับ Web App หลัก
+    — กรอกข้อมูลแล้วกด “สร้าง Excel” ระบบจะใช้
+    <b>SiamTin_Master.xlsx</b>
+    เป็นไฟล์ต้นฉบับและส่งกลับเป็น Excel ที่แก้ไขต่อได้
+  </div>
+
+
+  <form
+    id="excelForm"
+  >
+
+  <div class="grid">
+
+    <div class="section-title">
+      เอกสาร
+    </div>
+
+    <div class="field">
+      <label>FA NO.</label>
+      <input
+        name="FA NO."
+        value="FA2608001"
+      >
+    </div>
+
+    <div class="field">
+      <label>INVOICE NO.</label>
+      <input
+        name="INVOICE NO."
+        value="INV260803001"
+      >
+    </div>
+
+    <div class="field">
+      <label>BOOKING NO.</label>
+      <input
+        name="BOOKING NO"
+        value="ONEBK26080301"
+      >
+    </div>
+
+    <div class="field">
+      <label>CONT NO.</label>
+      <input
+        name="CONT NO."
+        value="ONEU3273113"
+      >
+    </div>
+
+
+    <div class="section-title">
+      การขนส่ง
+    </div>
+
+    <div class="field w2">
+      <label>Truck Company</label>
+      <input
+        name="Truck Com."
+        value="HATSABOON"
+      >
+    </div>
+
+    <div class="field">
+      <label>Truck Type</label>
+      <select
+        name="TRUCK TYPE"
+      >
+        <option>รถบรรทุก</option>
+        <option>หัวลาก</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Driver Phone</label>
+      <input
+        name="DRIVER PHONE"
+        value="0994454932"
+      >
+    </div>
+
+    <div class="field w2">
+      <label>Driver Name</label>
+      <input
+        name="DRIVER NAME"
+        value="วิทยา ไชยธาดา"
+      >
+    </div>
+
+    <div class="field">
+      <label>Truck No.</label>
+      <input
+        name="TRUCK NO."
+        value="71-8907"
+      >
+    </div>
+
+    <div class="field">
+      <label>Trailer No.</label>
+      <input
+        name="TRAILER NO."
+      >
+    </div>
+
+    <div class="field">
+      <label>FROM</label>
+      <input
+        name="FROM"
+        value="SIAM TIN"
+      >
+    </div>
+
+    <div class="field">
+      <label>TO</label>
+      <input
+        name="TO"
+        value="SONGKHLA PORT"
+      >
+    </div>
+
+    <div class="field">
+      <label>Liner</label>
+      <input
+        name="Liner"
+        value="ONE"
+      >
+    </div>
+
+    <div class="field">
+      <label>SEAL NO.</label>
+      <input
+        name="SEAL NO."
+        value="THBP49981"
+      >
+    </div>
+
+
+    <div class="section-title">
+      รับตู้ / เข้าโรงงาน / คืนตู้
+    </div>
+
+    <div class="field w2">
+      <label>Pickup Contact</label>
+      <input
+        name="PICKUP CONTACT"
+      >
+    </div>
+
+    <div class="field w2">
+      <label>Pickup Place</label>
+      <input
+        name="PICKUP PLACE"
+      >
+    </div>
+
+    <div class="field">
+      <label>Pickup Date</label>
+      <input
+        type="date"
+        name="PICKUP DATE"
+      >
+    </div>
+
+    <div class="field">
+      <label>Factory Date</label>
+      <input
+        type="date"
+        name="FACTORY DATE"
+      >
+    </div>
+
+    <div class="field">
+      <label>Factory Time</label>
+      <input
+        type="time"
+        name="FACTORY TIME"
+      >
+    </div>
+
+    <div class="field w2">
+      <label>Return Place</label>
+      <input
+        name="RETURN PLACE"
+      >
+    </div>
+
+    <div class="field">
+      <label>Return Date</label>
+      <input
+        type="date"
+        name="Return date"
+      >
+    </div>
+
+    <div class="field">
+      <label>Return Time</label>
+      <input
+        type="time"
+        name="RETURN TIME"
+      >
+    </div>
+
+
+    <div class="section-title">
+      อนุมัติ
+    </div>
+
+    <div class="field w2">
+      <label>Approver</label>
+      <input
+        name="APPROVER"
+      >
+    </div>
+
+    <div class="field">
+      <label>Approve Date</label>
+      <input
+        type="date"
+        name="APPROVE DATE"
+      >
+    </div>
+
+  </div>
+
+
+  <div class="actions">
+
+    <button
+      type="button"
+      class="light"
+      onclick="document.getElementById('excelForm').reset()"
+    >
+      ล้างข้อมูล
+    </button>
+
+    <button
+      type="submit"
+      class="primary"
+    >
+      สร้าง Excel
+    </button>
+
+  </div>
+
+  </form>
+
+
+  <div id="status">
+  </div>
+
+</div>
+
+</main>
+
+
+<script>
+
+document
+  .getElementById(
+    'excelForm'
+  )
+  .addEventListener(
+    'submit',
+    async function(
+      event
+    ){
+
+      event.preventDefault();
+
+      const status =
+        document.getElementById(
+          'status'
+        );
+
+      status.textContent =
+        'กำลังสร้าง Excel...';
+
+      const form =
+        new FormData(
+          event.target
+        );
+
+      const data =
+        Object.fromEntries(
+          form.entries()
+        );
+
+      /*
+        ค่าเริ่มต้นไม่ทำ X/ติ๊กใน checkbox
+        เพื่อรักษา Master ให้สะอาด
+      */
+      data.markBoxes =
+        false;
+
+      try{
+
+        const response =
+          await fetch(
+            '/api/generate',
+            {
+              method:
+                'POST',
+
+              headers:{
+                'Content-Type':
+                  'application/json'
+              },
+
+              body:
+                JSON.stringify(
+                  data
+                )
+            }
+          );
+
+        if(
+          !response.ok
+        ){
+
+          let detail =
+            '';
+
+          try{
+
+            const errorData =
+              await response.json();
+
+            detail =
+              errorData.error ||
+              JSON.stringify(
+                errorData
+              );
+
+          }
+          catch(error){
+
+            detail =
+              await response.text();
+
+          }
+
+          throw new Error(
+            detail ||
+            'สร้าง Excel ไม่สำเร็จ'
+          );
+
+        }
+
+        const blob =
+          await response.blob();
+
+        const disposition =
+          response.headers.get(
+            'Content-Disposition'
+          ) ||
+          '';
+
+        const match =
+          disposition.match(
+            /filename="([^"]+)"/i
+          );
+
+        const fileName =
+          match
+            ? match[1]
+            : 'SiamTin_Plan.xlsx';
+
+        const url =
+          URL.createObjectURL(
+            blob
+          );
+
+        const link =
+          document.createElement(
+            'a'
+          );
+
+        link.href =
+          url;
+
+        link.download =
+          fileName;
+
+        document
+          .body
+          .appendChild(
+            link
+          );
+
+        link.click();
+
+        link.remove();
+
+        setTimeout(
+          () =>
+            URL.revokeObjectURL(
+              url
+            ),
+          3000
+        );
+
+        status.textContent =
+          'สร้าง Excel สำเร็จ ✓';
+
+      }
+      catch(
+        error
+      ){
+
+        console.error(
+          error
+        );
+
+        status.textContent =
+          'Error: ' +
+          error.message;
+
+      }
+
+    }
+  );
+
+</script>
+
+</body>
+
+</html>
